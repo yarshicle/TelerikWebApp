@@ -1,0 +1,15 @@
+﻿{
+  "servers": {
+    "telerikBlazorAssistant": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@progress/telerik-blazor-mcp@latest"
+      ],
+      "env": {
+        "TELERIK_LICENSE_PATH": "C:\\Users\\yarsh\\AppData\\Roaming\\Telerik\\telerik-license.txt"
+      }
+    }
+  }
+}

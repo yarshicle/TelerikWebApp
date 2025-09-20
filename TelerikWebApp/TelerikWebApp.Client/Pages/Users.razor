@@ -1,0 +1,90 @@
+@page "/users"
+@using TelerikWebApp.Client.Models
+@using TelerikWebApp.Client.Services
+@inject UserService UserService
+@rendermode InteractiveAuto
+
+<PageTitle>Users</PageTitle>
+
+<h1>Users Management</h1>
+
+<TelerikGrid Data="@GridData"
+             Pageable="true"
+             PageSize="20"
+             Sortable="true"
+             FilterMode="GridFilterMode.FilterRow"
+             Height="600px"
+             Class="compact-grid">
+    <GridSettings>
+        <GridPagerSettings InputType="PagerInputType.Input" />
+    </GridSettings>
+    <GridColumns>
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.Id)" Width="80px" Title="ID" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.FirstName)" Width="150px" Title="First Name" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.LastName)" Width="150px" Title="Last Name" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.Email)" Width="250px" Title="Email" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.Department)" Width="180px" Title="Department" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.Position)" Width="200px" Title="Position" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.Salary)" Width="120px" Title="Salary" DisplayFormat="{0:C0}" />
+        <GridColumn Field="@nameof(TelerikWebApp.Client.Models.User.IsActive)" Width="100px" Title="Active">
+            <Template>
+                @{
+                    var user = (TelerikWebApp.Client.Models.User)context;
+                }
+                <span class="status-badge @(user.IsActive ? "status-active" : "status-inactive")">
+                    @(user.IsActive ? "Active" : "Inactive")
+                </span>
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</TelerikGrid>
+
+<style>
+    .compact-grid {
+        --kendo-grid-header-padding-y: 8px;
+        --kendo-grid-cell-padding-y: 6px;
+        --kendo-grid-font-size: 13px;
+    }
+
+    .compact-grid .k-grid-header .k-header {
+        font-weight: 600;
+        background-color: var(--kendo-color-primary-subtle);
+    }
+
+    .compact-grid .k-grid-table td {
+        border-color: var(--kendo-color-border-alt);
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    .status-active {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .status-inactive {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
+@code {
+    private List<TelerikWebApp.Client.Models.User> GridData = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GridData = await UserService.GetUsersAsync();
+    }
+}

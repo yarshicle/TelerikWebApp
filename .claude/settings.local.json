@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "mcp__telerikBlazorAssistant__telerik_blazor_assistant"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
