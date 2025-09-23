@@ -1,0 +1,289 @@
+@using Telerik.DataSource
+@using TelerikWebApp.Client.Models
+
+<TelerikWindow @bind-Visible="@IsVisible"
+               Width="800px"
+               Height="600px"
+               Modal="true"
+               Resizable="true">
+    <WindowTitle>
+        Create Custom Filter
+    </WindowTitle>
+    <WindowContent>
+        <div class="filter-builder-content">
+            <TelerikFilter @ref="FilterRef"
+                          Value="@CurrentFilterDescriptor"
+                          OnUpdate="@OnFilterUpdate">
+                <FilterFields>
+                    <FilterField Name="@nameof(UserViewModel.Id)" Type="@typeof(int)" Label="ID" />
+                    <FilterField Name="@nameof(UserViewModel.FirstName)" Type="@typeof(string)" Label="First Name" />
+                    <FilterField Name="@nameof(UserViewModel.LastName)" Type="@typeof(string)" Label="Last Name" />
+                    <FilterField Name="@nameof(UserViewModel.Email)" Type="@typeof(string)" Label="Email" />
+                    <FilterField Name="@nameof(UserViewModel.Department)" Type="@typeof(string)" Label="Department" />
+                    <FilterField Name="@nameof(UserViewModel.Position)" Type="@typeof(string)" Label="Position" />
+                    <FilterField Name="@nameof(UserViewModel.Salary)" Type="@typeof(decimal)" Label="Salary" />
+                    <FilterField Name="@nameof(UserViewModel.StatusText)" Type="@typeof(string)" Label="Active Status" />
+                </FilterFields>
+            </TelerikFilter>
+
+            <div class="filter-actions">
+                <TelerikButton OnClick="@OnCancel"
+                              FillMode="@ThemeConstants.Button.FillMode.Outline"
+                              ThemeColor="@ThemeConstants.Button.ThemeColor.Secondary"
+                              Icon="@SvgIcon.Cancel">
+                    Cancel
+                </TelerikButton>
+                <TelerikButton OnClick="@OnSetFilter"
+                              ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
+                              Icon="@SvgIcon.Check">
+                    Set Filter
+                </TelerikButton>
+            </div>
+        </div>
+    </WindowContent>
+    <WindowActions>
+        @* <WindowAction Name="Cancel" OnClick="@OnCancel" Title="Cancel" />
+        <WindowAction Name="SetFilter" OnClick="@OnSetFilter" Title="Set Filter" /> *@
+        <WindowAction Name="Close" />
+    </WindowActions>
+</TelerikWindow>
+
+<style>
+    .filter-builder-content {
+        /* padding: 20px; */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-description {
+        margin-bottom: 20px;
+        color: var(--kendo-color-subtle);
+        font-size: 14px;
+    }
+
+    .filter-builder-content h4 {
+        margin: 0 0 10px 0;
+        color: var(--kendo-color-primary);
+    }
+
+    .filter-builder-content .k-filter {
+        flex: 1;
+        /* border: 1px solid var(--kendo-color-border);
+        border-radius: 4px;
+        padding: 15px; */
+        background: var(--kendo-color-surface-alt);
+    }
+
+    .filter-actions {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        padding-top: 15px;
+        border-top: 1px solid var(--kendo-color-border-alt);
+    }
+
+    .filter-actions .k-button {
+        height: 36px;
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 4px;
+        min-width: 100px;
+    }
+
+    /* Compact TelerikFilter styling */
+    .filter-builder-content .k-filter {
+        font-size: 12px;
+    }
+
+    .filter-builder-content .k-filter .k-filter-group {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+    .filter-builder-content .k-filter .k-filter-item {
+        padding: 6px 8px;
+        margin-bottom: 6px;
+    }
+
+    .filter-builder-content .k-filter .k-dropdownlist,
+    .filter-builder-content .k-filter .k-textbox,
+    .filter-builder-content .k-filter .k-numerictextbox,
+    .filter-builder-content .k-filter .k-datepicker {
+        height: 28px !important;
+        font-size: 11px !important;
+        padding: 2px 6px !important;
+    }
+
+    .filter-builder-content .k-filter .k-button {
+        height: 26px !important;
+        padding: 2px 8px !important;
+        font-size: 11px !important;
+        min-width: auto !important;
+    }
+
+    .filter-builder-content .k-filter .k-icon {
+        font-size: 12px !important;
+    }
+
+    .filter-builder-content .k-filter .k-label {
+        font-size: 11px !important;
+        padding: 2px 4px !important;
+        line-height: 1.2;
+    }
+
+    .filter-builder-content .k-filter .k-filter-group-header {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        font-weight: 600;
+    }
+
+    .filter-builder-content .k-filter .k-filter-group-body {
+        padding: 6px !important;
+    }
+
+    /* Compact dropdown menu styling */
+    .k-popup .k-list-item {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        line-height: 1.2 !important;
+        min-height: 24px !important;
+    }
+
+    .k-popup .k-list {
+        padding: 2px !important;
+    }
+
+    .k-popup .k-list-header {
+        padding: 4px 8px !important;
+        font-size: 10px !important;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .k-popup .k-list-group-item {
+        padding: 3px 8px !important;
+        font-size: 11px !important;
+    }
+
+    .k-popup .k-list-optionlabel {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        font-style: italic;
+    }
+
+    /* Compact dropdown button and icons */
+    .filter-builder-content .k-filter .k-dropdownlist .k-button {
+        height: 28px !important;
+        width: 28px !important;
+        padding: 2px !important;
+    }
+
+    .filter-builder-content .k-filter .k-dropdownlist .k-button .k-icon {
+        font-size: 10px !important;
+    }
+
+    /* Compact multiselect tags */
+    .filter-builder-content .k-filter .k-multiselect .k-chip {
+        padding: 1px 4px !important;
+        font-size: 10px !important;
+        line-height: 1.2;
+        margin: 1px !important;
+    }
+
+    .filter-builder-content .k-filter .k-multiselect .k-chip .k-chip-action {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .filter-builder-content .k-filter .k-multiselect .k-chip .k-icon {
+        font-size: 10px !important;
+    }
+</style>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback<bool> IsVisibleChanged { get; set; }
+    [Parameter] public EventCallback<CompositeFilterDescriptor?> OnFilterApplied { get; set; }
+    [Parameter] public List<UserViewModel> FilterData { get; set; } = new();
+
+    private TelerikFilter? FilterRef;
+    private CompositeFilterDescriptor? CurrentFilterDescriptor = new();
+    private CompositeFilterDescriptor? BackupFilterDescriptor;
+
+    protected override void OnParametersSet()
+    {
+        if (IsVisible)
+        {
+            // Backup current filter when window opens
+            BackupFilterDescriptor = DeepCopyFilter(CurrentFilterDescriptor);
+        }
+    }
+
+    private async Task OnCancel()
+    {
+        // Restore the backup filter
+        CurrentFilterDescriptor = DeepCopyFilter(BackupFilterDescriptor);
+        await CloseWindow();
+    }
+
+    private async Task OnSetFilter()
+    {
+        await OnFilterApplied.InvokeAsync(CurrentFilterDescriptor);
+        await CloseWindow();
+    }
+
+    private async Task CloseWindow()
+    {
+        IsVisible = false;
+        await IsVisibleChanged.InvokeAsync(IsVisible);
+    }
+
+    public void ResetFilter()
+    {
+        CurrentFilterDescriptor = new CompositeFilterDescriptor();
+    }
+
+    private void OnFilterUpdate()
+    {
+        // The filter component automatically updates the Value property
+        // This method is called when the filter changes
+        StateHasChanged();
+    }
+
+    private CompositeFilterDescriptor? DeepCopyFilter(CompositeFilterDescriptor? source)
+    {
+        if (source == null)
+            return new CompositeFilterDescriptor();
+
+        var copy = new CompositeFilterDescriptor
+        {
+            LogicalOperator = source.LogicalOperator
+        };
+
+        foreach (var descriptor in source.FilterDescriptors)
+        {
+            if (descriptor is FilterDescriptor fd)
+            {
+                copy.FilterDescriptors.Add(new FilterDescriptor
+                {
+                    Member = fd.Member,
+                    MemberType = fd.MemberType,
+                    Operator = fd.Operator,
+                    Value = fd.Value
+                });
+            }
+            else if (descriptor is CompositeFilterDescriptor cfd)
+            {
+                var nestedCopy = DeepCopyFilter(cfd);
+                if (nestedCopy != null)
+                    copy.FilterDescriptors.Add(nestedCopy);
+            }
+        }
+
+        return copy;
+    }
+}
