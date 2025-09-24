@@ -1,15 +1,96 @@
+/* Light Theme Variables */
+:root,
+html.theme-light {
+    --app-bg-color: #ffffff;
+    --app-surface-color: #f8f9fa;
+    --app-surface-alt-color: #e9ecef;
+    --app-text-color: #212529;
+    --app-text-muted-color: #6c757d;
+    --app-text-light-color: #495057;
+    --app-border-color: #dee2e6;
+    --app-border-light-color: #f1f3f4;
+    --app-primary-color: #1b6ec2;
+    --app-primary-hover-color: #1861ac;
+    --app-secondary-color: #6c757d;
+    --app-success-color: #198754;
+    --app-info-color: #0dcaf0;
+    --app-warning-color: #ffc107;
+    --app-danger-color: #dc3545;
+    --app-link-color: #006bb7;
+    --app-sidebar-bg: #343a40;
+    --app-sidebar-text: #ffffff;
+    --app-navbar-bg: rgba(0,0,0,0.4);
+}
+
+/* Dark Theme Variables */
+html.theme-dark {
+    --app-bg-color: #121212;
+    --app-surface-color: #1e1e1e;
+    --app-surface-alt-color: #2d2d2d;
+    --app-text-color: #ffffff;
+    --app-text-muted-color: #a6a6a6;
+    --app-text-light-color: #cccccc;
+    --app-border-color: #404040;
+    --app-border-light-color: #333333;
+    --app-primary-color: #90caf9;
+    --app-primary-hover-color: #64b5f6;
+    --app-secondary-color: #9e9e9e;
+    --app-success-color: #4caf50;
+    --app-info-color: #29b6f6;
+    --app-warning-color: #ff9800;
+    --app-danger-color: #f44336;
+    --app-link-color: #90caf9;
+    --app-sidebar-bg: #1a1a1a;
+    --app-sidebar-text: #ffffff;
+    --app-navbar-bg: rgba(0,0,0,0.6);
+}
+
+/* Apply theme variables */
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--app-bg-color);
+    color: var(--app-text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.page {
+    background-color: var(--app-bg-color);
+    color: var(--app-text-color);
+}
+
+main {
+    background-color: var(--app-bg-color);
+}
+
+.content {
+    background-color: var(--app-bg-color);
+    color: var(--app-text-color);
+}
+
+/* Update existing elements to use theme variables */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--app-text-color);
+}
+
+.top-row {
+    background-color: var(--app-surface-alt-color);
+    color: var(--app-text-color);
+    border-bottom: 1px solid var(--app-border-color);
+}
+
+.sidebar {
+    background-color: var(--app-sidebar-bg);
+    color: var(--app-sidebar-text);
 }
 
 a, .btn-link {
-    color: #006bb7;
+    color: var(--app-link-color);
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: var(--app-primary-color);
+    border-color: var(--app-primary-hover-color);
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {

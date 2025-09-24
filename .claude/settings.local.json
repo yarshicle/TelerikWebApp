@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(mkdir:*)",
-      "mcp__telerikBlazorAssistant__telerik_blazor_assistant"
+      "mcp__telerikBlazorAssistant__telerik_blazor_assistant",
+      "Bash(dotnet run:*)",
+      "Bash(dotnet build)"
     ],
     "deny": [],
     "ask": []

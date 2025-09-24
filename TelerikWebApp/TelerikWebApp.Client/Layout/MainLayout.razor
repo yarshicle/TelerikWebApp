@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using TelerikWebApp.Client.Services
+@inherits LayoutComponentBase
+@inject ThemeService ThemeService
+
 <TelerikRootComponent>
 	<div class="page">
 		<div class="sidebar">
@@ -7,7 +10,7 @@
 
 		<main>
 			<div class="top-row px-4">
-				<a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+				<ThemeSwitcher />
 			</div>
 
 			<article class="content px-4">
@@ -22,3 +25,13 @@
 		<span class="dismiss">🗙</span>
 	</div>
 </TelerikRootComponent>
+
+@code {
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await ThemeService.InitializeAsync();
+		}
+	}
+}

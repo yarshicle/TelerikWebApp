@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 builder.Services.AddTelerikBlazor();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ThemeService>();
 
 var app = builder.Build();
 

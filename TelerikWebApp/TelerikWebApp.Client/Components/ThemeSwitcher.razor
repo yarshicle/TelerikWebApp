@@ -1,0 +1,39 @@
+@using TelerikWebApp.Client.Services
+@inject ThemeService ThemeService
+@implements IDisposable
+
+<div class="theme-switcher">
+    <span class="theme-icon sun-icon @(isDarkTheme ? "inactive" : "") me-2"></span>
+    <TelerikSwitch @bind-Value="@isDarkTheme"
+                   OnChange="@OnThemeChanged"
+                   Width="50px">
+    </TelerikSwitch>
+    <span class="theme-icon moon-icon @(isDarkTheme ? "" : "inactive") ms-2"></span>
+</div>
+
+@code {
+    private bool isDarkTheme = true;
+
+    protected override void OnInitialized()
+    {
+        isDarkTheme = ThemeService.CurrentTheme == Theme.MaterialDark;
+        ThemeService.ThemeChanged += OnThemeChangedHandler;
+    }
+
+    private async Task OnThemeChanged()
+    {
+        var newTheme = isDarkTheme ? Theme.MaterialDark : Theme.MaterialLight;
+        await ThemeService.SetThemeAsync(newTheme);
+    }
+
+    private void OnThemeChangedHandler(Theme theme)
+    {
+        isDarkTheme = theme == Theme.MaterialDark;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ThemeService.ThemeChanged -= OnThemeChangedHandler;
+    }
+}
