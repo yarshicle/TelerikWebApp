@@ -12,8 +12,8 @@
     <WindowContent>
         <div class="filter-builder-content">
             <TelerikFilter @ref="FilterRef"
-                          Value="@CurrentFilterDescriptor"
-                          OnUpdate="@OnFilterUpdate">
+                           Value="@CurrentFilterDescriptor"
+                           OnUpdate="@OnFilterUpdate">
                 <FilterFields>
                     <FilterField Name="@nameof(UserViewModel.Id)" Type="@typeof(int)" Label="ID" />
                     <FilterField Name="@nameof(UserViewModel.FirstName)" Type="@typeof(string)" Label="First Name" />
@@ -28,14 +28,14 @@
 
             <div class="filter-actions">
                 <TelerikButton OnClick="@OnCancel"
-                              FillMode="@ThemeConstants.Button.FillMode.Outline"
-                              ThemeColor="@ThemeConstants.Button.ThemeColor.Secondary"
-                              Icon="@SvgIcon.Cancel">
+                               FillMode="@ThemeConstants.Button.FillMode.Outline"
+                               ThemeColor="@ThemeConstants.Button.ThemeColor.Secondary"
+                               Icon="@SvgIcon.Cancel">
                     Cancel
                 </TelerikButton>
                 <TelerikButton OnClick="@OnSetFilter"
-                              ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
-                              Icon="@SvgIcon.Check">
+                               ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
+                               Icon="@SvgIcon.Check">
                     Set Filter
                 </TelerikButton>
             </div>
@@ -70,8 +70,8 @@
     .filter-builder-content .k-filter {
         flex: 1;
         /* border: 1px solid var(--kendo-color-border);
-        border-radius: 4px;
-        padding: 15px; */
+            border-radius: 4px;
+            padding: 15px; */
         background: var(--kendo-color-surface-alt);
     }
 
@@ -84,65 +84,65 @@
         border-top: 1px solid var(--kendo-color-border-alt);
     }
 
-    .filter-actions .k-button {
-        height: 36px;
-        padding: 8px 20px;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 4px;
-        min-width: 100px;
-    }
+        .filter-actions .k-button {
+            height: 36px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            min-width: 100px;
+        }
 
     /* Compact TelerikFilter styling */
     .filter-builder-content .k-filter {
         font-size: 12px;
     }
 
-    .filter-builder-content .k-filter .k-filter-group {
-        padding: 8px;
-        margin-bottom: 8px;
-    }
+        .filter-builder-content .k-filter .k-filter-group {
+            padding: 8px;
+            margin-bottom: 8px;
+        }
 
-    .filter-builder-content .k-filter .k-filter-item {
-        padding: 6px 8px;
-        margin-bottom: 6px;
-    }
+        .filter-builder-content .k-filter .k-filter-item {
+            padding: 6px 8px;
+            margin-bottom: 6px;
+        }
 
-    .filter-builder-content .k-filter .k-dropdownlist,
-    .filter-builder-content .k-filter .k-textbox,
-    .filter-builder-content .k-filter .k-numerictextbox,
-    .filter-builder-content .k-filter .k-datepicker {
-        height: 28px !important;
-        font-size: 11px !important;
-        padding: 2px 6px !important;
-    }
+        .filter-builder-content .k-filter .k-dropdownlist,
+        .filter-builder-content .k-filter .k-textbox,
+        .filter-builder-content .k-filter .k-numerictextbox,
+        .filter-builder-content .k-filter .k-datepicker {
+            height: 28px !important;
+            font-size: 11px !important;
+            padding: 2px 6px !important;
+        }
 
-    .filter-builder-content .k-filter .k-button {
-        height: 26px !important;
-        padding: 2px 8px !important;
-        font-size: 11px !important;
-        min-width: auto !important;
-    }
+        .filter-builder-content .k-filter .k-button {
+            height: 26px !important;
+            padding: 2px 8px !important;
+            font-size: 11px !important;
+            min-width: auto !important;
+        }
 
-    .filter-builder-content .k-filter .k-icon {
-        font-size: 12px !important;
-    }
+        .filter-builder-content .k-filter .k-icon {
+            font-size: 12px !important;
+        }
 
-    .filter-builder-content .k-filter .k-label {
-        font-size: 11px !important;
-        padding: 2px 4px !important;
-        line-height: 1.2;
-    }
+        .filter-builder-content .k-filter .k-label {
+            font-size: 11px !important;
+            padding: 2px 4px !important;
+            line-height: 1.2;
+        }
 
-    .filter-builder-content .k-filter .k-filter-group-header {
-        padding: 4px 8px !important;
-        font-size: 11px !important;
-        font-weight: 600;
-    }
+        .filter-builder-content .k-filter .k-filter-group-header {
+            padding: 4px 8px !important;
+            font-size: 11px !important;
+            font-weight: 600;
+        }
 
-    .filter-builder-content .k-filter .k-filter-group-body {
-        padding: 6px !important;
-    }
+        .filter-builder-content .k-filter .k-filter-group-body {
+            padding: 6px !important;
+        }
 
     /* Compact dropdown menu styling */
     .k-popup .k-list-item {
@@ -182,9 +182,9 @@
         padding: 2px !important;
     }
 
-    .filter-builder-content .k-filter .k-dropdownlist .k-button .k-icon {
-        font-size: 10px !important;
-    }
+        .filter-builder-content .k-filter .k-dropdownlist .k-button .k-icon {
+            font-size: 10px !important;
+        }
 
     /* Compact multiselect tags */
     .filter-builder-content .k-filter .k-multiselect .k-chip {
@@ -194,14 +194,14 @@
         margin: 1px !important;
     }
 
-    .filter-builder-content .k-filter .k-multiselect .k-chip .k-chip-action {
-        width: 16px !important;
-        height: 16px !important;
-    }
+        .filter-builder-content .k-filter .k-multiselect .k-chip .k-chip-action {
+            width: 16px !important;
+            height: 16px !important;
+        }
 
-    .filter-builder-content .k-filter .k-multiselect .k-chip .k-icon {
-        font-size: 10px !important;
-    }
+        .filter-builder-content .k-filter .k-multiselect .k-chip .k-icon {
+            font-size: 10px !important;
+        }
 </style>
 
 @code {
@@ -209,6 +209,7 @@
     [Parameter] public EventCallback<bool> IsVisibleChanged { get; set; }
     [Parameter] public EventCallback<CompositeFilterDescriptor?> OnFilterApplied { get; set; }
     [Parameter] public List<UserViewModel> FilterData { get; set; } = new();
+    [Parameter] public CompositeFilterDescriptor? ExistingFilter { get; set; }
 
     private TelerikFilter? FilterRef;
     private CompositeFilterDescriptor? CurrentFilterDescriptor = new();
@@ -218,6 +219,8 @@
     {
         if (IsVisible)
         {
+            // Load existing filter when window opens
+            CurrentFilterDescriptor = DeepCopyFilter(ExistingFilter) ?? new CompositeFilterDescriptor();
             // Backup current filter when window opens
             BackupFilterDescriptor = DeepCopyFilter(CurrentFilterDescriptor);
         }
@@ -275,8 +278,7 @@
                     Operator = fd.Operator,
                     Value = fd.Value
                 });
-            }
-            else if (descriptor is CompositeFilterDescriptor cfd)
+            } else if (descriptor is CompositeFilterDescriptor cfd)
             {
                 var nestedCopy = DeepCopyFilter(cfd);
                 if (nestedCopy != null)

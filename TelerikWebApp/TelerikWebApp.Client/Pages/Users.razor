@@ -28,35 +28,38 @@
 			</div>
 		</div>
 
-		<TelerikGrid Data="@FilteredGridData"
-				 Pageable="true"
-				 PageSize="20"
-				 Sortable="true"
-				 FilterMode="GridFilterMode.FilterMenu"
-				 Height="@(IsGridMaximized ? "calc(100vh - 120px)" : "600px")"
-				 Class="compact-grid">
-	<GridSettings>
-		<GridPagerSettings InputType="PagerInputType.Input" />
-	</GridSettings>
-	<GridColumns>
-		<GridColumn Field="@nameof(UserViewModel.Id)" Width="80px" Title="ID" />
-		<GridColumn Field="@nameof(UserViewModel.FirstName)" Width="150px" Title="First Name" />
-		<GridColumn Field="@nameof(UserViewModel.LastName)" Width="150px" Title="Last Name" />
-		<GridColumn Field="@nameof(UserViewModel.Email)" Width="250px" Title="Email" />
-		<GridColumn Field="@nameof(UserViewModel.Department)" Width="180px" Title="Department" FilterMenuType="@FilterMenuType.CheckBoxList" />
-		<GridColumn Field="@nameof(UserViewModel.Position)" Width="200px" Title="Position" FilterMenuType="@FilterMenuType.CheckBoxList" />
-		<GridColumn Field="@nameof(UserViewModel.Salary)" Width="120px" Title="Salary" DisplayFormat="{0:C0}" />
-		<GridColumn Field="@nameof(UserViewModel.StatusText)" Width="100px" Title="Active" FilterMenuType="@FilterMenuType.CheckBoxList">
-			<Template>
-				@{
-					var user = (UserViewModel)context;
-				}
-				<span class="status-badge @(user.IsActive ? "status-active" : "status-inactive")">
-					@user.StatusText
-				</span>
-			</Template>
-		</GridColumn>
-	</GridColumns>
+		<TelerikGrid @ref="GridRef"
+					 Data="@GridViewModels"
+					 TItem="UserViewModel"
+					 Pageable="true"
+					 PageSize="20"
+					 Sortable="true"
+					 FilterMode="GridFilterMode.FilterMenu"
+					 Height="@(IsGridMaximized ? "calc(100vh - 120px)" : "600px")"
+					 Class="compact-grid"
+					 OnStateChanged="@OnGridStateChanged">
+			<GridSettings>
+				<GridPagerSettings InputType="PagerInputType.Input" />
+			</GridSettings>
+			<GridColumns>
+				<GridColumn Field="@nameof(UserViewModel.Id)" Width="80px" Title="ID" />
+				<GridColumn Field="@nameof(UserViewModel.FirstName)" Width="150px" Title="First Name" />
+				<GridColumn Field="@nameof(UserViewModel.LastName)" Width="150px" Title="Last Name" />
+				<GridColumn Field="@nameof(UserViewModel.Email)" Width="250px" Title="Email" />
+				<GridColumn Field="@nameof(UserViewModel.Department)" Width="180px" Title="Department" FilterMenuType="@FilterMenuType.CheckBoxList" />
+				<GridColumn Field="@nameof(UserViewModel.Position)" Width="200px" Title="Position" FilterMenuType="@FilterMenuType.CheckBoxList" />
+				<GridColumn Field="@nameof(UserViewModel.Salary)" Width="120px" Title="Salary" DisplayFormat="{0:C0}" />
+				<GridColumn Field="@nameof(UserViewModel.StatusText)" Width="100px" Title="Active" FilterMenuType="@FilterMenuType.CheckBoxList">
+					<Template>
+						@{
+							var user = (UserViewModel)context;
+						}
+						<span class="status-badge @(user.IsActive ? "status-active" : "status-inactive")">
+							@user.StatusText
+						</span>
+					</Template>
+				</GridColumn>
+			</GridColumns>
 		</TelerikGrid>
 	</div>
 
@@ -76,7 +79,8 @@
 <UserFilterBuilder IsVisible="@ShowFilterWindow"
 				   IsVisibleChanged="@((bool value) => ShowFilterWindow = value)"
 				   FilterData="@GridViewModels"
-				   OnFilterApplied="@ApplyFilter" />
+				   OnFilterApplied="@ApplyFilter"
+				   ExistingFilter="@GetCurrentFilter()" />
 
 <style>
 	.compact-grid {
@@ -172,8 +176,8 @@
 		gap: 10px;
 		align-items: center;
 	}
-	
-			.grid-actions .k-button {
+
+		.grid-actions .k-button {
 			height: 32px;
 			padding: 6px 16px;
 			/* font-size: 13px; */
@@ -198,21 +202,21 @@
 		overflow: auto;
 	}
 
-	.grid-container-maximized h1 {
-		margin-top: 0;
-		margin-bottom: 15px;
-		font-size: 24px;
-	}
+		.grid-container-maximized h1 {
+			margin-top: 0;
+			margin-bottom: 15px;
+			font-size: 24px;
+		}
 
-	.grid-container-maximized .grid-actions {
-		position: sticky;
-		top: 0;
-		background: var(--kendo-color-surface);
-		padding: 10px 0;
-		margin-bottom: 10px;
-		border-bottom: 1px solid var(--kendo-color-border);
-		z-index: 1;
-	}
+		.grid-container-maximized .grid-actions {
+			position: sticky;
+			top: 0;
+			background: var(--kendo-color-surface);
+			padding: 10px 0;
+			margin-bottom: 10px;
+			border-bottom: 1px solid var(--kendo-color-border);
+			z-index: 1;
+		}
 
 	/* Grid wrapper and header styling */
 	.grid-wrapper {
@@ -258,25 +262,25 @@
 		color: var(--kendo-color-primary) !important;
 	}
 
-	.grid-maximize-btn:hover {
-		background: var(--kendo-color-primary-subtle) !important;
-		border-color: var(--kendo-color-border) !important;
-		color: var(--kendo-color-primary) !important;
-	}
+		.grid-maximize-btn:hover {
+			background: var(--kendo-color-primary-subtle) !important;
+			border-color: var(--kendo-color-border) !important;
+			color: var(--kendo-color-primary) !important;
+		}
 
-	.grid-maximize-btn:active {
-		background: var(--kendo-color-primary) !important;
-		color: var(--kendo-color-on-primary) !important;
-	}
+		.grid-maximize-btn:active {
+			background: var(--kendo-color-primary) !important;
+			color: var(--kendo-color-on-primary) !important;
+		}
 
-	.grid-maximize-btn:focus {
-		outline: none !important;
-		box-shadow: none !important;
-	}
+		.grid-maximize-btn:focus {
+			outline: none !important;
+			box-shadow: none !important;
+		}
 
-	.grid-maximize-btn .k-icon {
-		font-size: 12px !important;
-	}
+		.grid-maximize-btn .k-icon {
+			font-size: 12px !important;
+		}
 
 	/* Remove border radius from grid when inside wrapper */
 	.grid-wrapper .k-grid {
@@ -288,17 +292,21 @@
 @code {
 	private List<TelerikWebApp.Client.Models.User> GridData = new();
 	private List<UserViewModel> GridViewModels = new();
-	private List<UserViewModel> FilteredGridData = new();
 	private bool ShowFilterWindow = false;
-	private CompositeFilterDescriptor? CurrentFilter;
-	private bool HasActiveFilter => CurrentFilter?.FilterDescriptors?.Any() == true;
+	private TelerikGrid<UserViewModel>? GridRef;
+	private GridState<UserViewModel>? CurrentGridState;
+	private bool HasActiveFilter => CurrentGridState?.FilterDescriptors?.Any() == true;
 	private bool IsGridMaximized = false;
 
 	protected override async Task OnInitializedAsync()
 	{
 		GridData = await UserService.GetUsersAsync();
 		GridViewModels = GridData.Select(UserViewModel.FromUser).ToList();
-		FilteredGridData = GridViewModels.ToList();
+	}
+
+	private void OnGridStateChanged(GridStateEventArgs<UserViewModel> args)
+	{
+		CurrentGridState = args.GridState;
 	}
 
 	private void ShowFilterBuilder()
@@ -306,33 +314,73 @@
 		ShowFilterWindow = true;
 	}
 
-	private void ApplyFilter(CompositeFilterDescriptor? filterDescriptor)
+	private async Task ApplyFilter(CompositeFilterDescriptor? filterDescriptor)
 	{
-		CurrentFilter = filterDescriptor;
-		ApplyCurrentFilter();
-	}
-
-	private void ClearFilter()
-	{
-		CurrentFilter = null;
-		ApplyCurrentFilter();
-	}
-
-	private void ApplyCurrentFilter()
-	{
-		if (CurrentFilter == null || !CurrentFilter.FilterDescriptors.Any())
+		if (GridRef != null)
 		{
-			FilteredGridData = GridViewModels.ToList();
-		} else
-		{
-			var query = GridViewModels.AsQueryable();
-			var filteredQuery = query.ToDataSourceResult(new DataSourceRequest
+			// Get current state to preserve other settings
+			var currentState = GridRef.GetState();
+
+			var newState = new GridState<UserViewModel>
 			{
-				Filters = new List<IFilterDescriptor> { CurrentFilter }
-			});
-			FilteredGridData = (filteredQuery.Data as IEnumerable<UserViewModel>)?.ToList() ?? new List<UserViewModel>();
+				Page = currentState.Page,
+				SortDescriptors = currentState.SortDescriptors,
+				GroupDescriptors = currentState.GroupDescriptors,
+				FilterDescriptors = new List<IFilterDescriptor>()
+			};
+
+			// Add the new filter from filter builder
+			if (filterDescriptor != null && filterDescriptor.FilterDescriptors.Any())
+			{
+				newState.FilterDescriptors.Add(filterDescriptor);
+			}
+
+			await GridRef.SetStateAsync(newState);
+
+			// Update the CurrentGridState to reflect new filters
+			CurrentGridState = newState;
+			StateHasChanged();
 		}
-		StateHasChanged();
+	}
+
+	private async Task ClearFilter()
+	{
+		if (GridRef != null)
+		{
+			// Get current state to preserve other settings
+			var currentState = GridRef.GetState();
+
+			var newState = new GridState<UserViewModel>
+			{
+				Page = currentState.Page,
+				SortDescriptors = currentState.SortDescriptors,
+				GroupDescriptors = currentState.GroupDescriptors,
+				FilterDescriptors = new List<IFilterDescriptor>()
+			};
+
+			await GridRef.SetStateAsync(newState);
+
+			// Update the CurrentGridState to reflect cleared filters
+			CurrentGridState = newState;
+			StateHasChanged();
+		}
+	}
+
+	private CompositeFilterDescriptor? GetCurrentFilter()
+	{
+		if (CurrentGridState?.FilterDescriptors?.Any() != true) return null;
+
+		var combined = new CompositeFilterDescriptor
+		{
+			LogicalOperator = FilterCompositionLogicalOperator.And
+		};
+
+		foreach (var descriptor in CurrentGridState.FilterDescriptors)
+		{
+			combined.FilterDescriptors.Add(descriptor);
+		}
+
+		return combined.FilterDescriptors.Any() ? combined : null;
 	}
 
 	private async Task ToggleGridMaximize()
