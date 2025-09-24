@@ -212,14 +212,14 @@
     [Parameter] public CompositeFilterDescriptor? ExistingFilter { get; set; }
 
     private TelerikFilter? FilterRef;
-    private CompositeFilterDescriptor? CurrentFilterDescriptor = new();
+    private CompositeFilterDescriptor CurrentFilterDescriptor = new();
     private CompositeFilterDescriptor? BackupFilterDescriptor;
 
     protected override void OnParametersSet()
     {
         if (IsVisible)
         {
-            // Load existing filter when window opens
+            // Load existing filter when window opens - ensure we always have a valid CompositeFilterDescriptor
             CurrentFilterDescriptor = DeepCopyFilter(ExistingFilter) ?? new CompositeFilterDescriptor();
             // Backup current filter when window opens
             BackupFilterDescriptor = DeepCopyFilter(CurrentFilterDescriptor);
@@ -229,13 +229,15 @@
     private async Task OnCancel()
     {
         // Restore the backup filter
-        CurrentFilterDescriptor = DeepCopyFilter(BackupFilterDescriptor);
+        CurrentFilterDescriptor = DeepCopyFilter(BackupFilterDescriptor) ?? new CompositeFilterDescriptor();
         await CloseWindow();
     }
 
     private async Task OnSetFilter()
     {
-        await OnFilterApplied.InvokeAsync(CurrentFilterDescriptor);
+        // Pass null if the filter is empty, otherwise pass the actual filter
+        var filterToApply = CurrentFilterDescriptor?.FilterDescriptors?.Any() == true ? CurrentFilterDescriptor : null;
+        await OnFilterApplied.InvokeAsync(filterToApply);
         await CloseWindow();
     }
 
@@ -260,7 +262,7 @@
     private CompositeFilterDescriptor? DeepCopyFilter(CompositeFilterDescriptor? source)
     {
         if (source == null)
-            return new CompositeFilterDescriptor();
+            return null;
 
         var copy = new CompositeFilterDescriptor
         {

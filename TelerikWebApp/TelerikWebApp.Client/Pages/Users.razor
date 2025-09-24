@@ -32,7 +32,7 @@
 					 Data="@GridViewModels"
 					 TItem="UserViewModel"
 					 Pageable="true"
-					 PageSize="20"
+					 PageSize="@(IsGridMaximized ? 50 : 20)"
 					 Sortable="true"
 					 FilterMode="GridFilterMode.FilterMenu"
 					 Height="@(IsGridMaximized ? "calc(100vh - 120px)" : "600px")"
@@ -65,7 +65,7 @@
 
 	<div class="grid-actions">
 		<TelerikButton OnClick="@ShowFilterBuilder" Icon="@SvgIcon.Filter" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">
-			Create Filter
+			@(HasActiveFilter ? "Update Filter" : "Create Filter")
 		</TelerikButton>
 		@if (HasActiveFilter)
 		{
@@ -287,6 +287,189 @@
 		border: none !important;
 		border-radius: 0 !important;
 	}
+
+	/* Compact FilterMenu styling */
+	.k-grid-filter-popup .k-popup {
+		font-size: 12px !important;
+	}
+
+	.k-grid-filter-popup .k-textbox,
+	.k-grid-filter-popup .k-dropdownlist,
+	.k-grid-filter-popup .k-numerictextbox,
+	.k-grid-filter-popup .k-datepicker,
+	.k-grid-filter-popup .k-datetimepicker {
+		height: 28px !important;
+		font-size: 11px !important;
+		padding: 2px 6px !important;
+	}
+
+	.k-grid-filter-popup .k-button {
+		height: 28px !important;
+		padding: 4px 12px !important;
+		font-size: 11px !important;
+		border-radius: 3px !important;
+	}
+
+	.k-grid-filter-popup .k-button.k-button-sm {
+		height: 26px !important;
+		padding: 3px 8px !important;
+		font-size: 10px !important;
+	}
+
+	.k-grid-filter-popup .k-icon {
+		font-size: 11px !important;
+	}
+
+	.k-grid-filter-popup .k-label {
+		font-size: 11px !important;
+		padding: 2px 4px !important;
+		line-height: 1.2;
+	}
+
+	/* Compact FilterMenu CheckBoxList styling */
+	.k-grid-filter-popup .k-list-item {
+		padding: 3px 8px !important;
+		font-size: 11px !important;
+		line-height: 1.3 !important;
+		min-height: 22px !important;
+	}
+
+	.k-grid-filter-popup .k-list-item .k-checkbox {
+		width: 14px !important;
+		height: 14px !important;
+		margin-right: 6px !important;
+	}
+
+	.k-grid-filter-popup .k-list-item .k-checkbox-label {
+		font-size: 11px !important;
+		line-height: 1.3 !important;
+	}
+
+	.k-grid-filter-popup .k-list {
+		padding: 2px !important;
+	}
+
+	.k-grid-filter-popup .k-list-header {
+		padding: 4px 8px !important;
+		font-size: 10px !important;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		background: var(--kendo-color-surface-alt) !important;
+	}
+
+	/* Compact FilterMenu form styling */
+	.k-grid-filter-popup .k-form-field {
+		margin-bottom: 8px !important;
+	}
+
+	.k-grid-filter-popup .k-form-field-wrap {
+		padding: 2px 0 !important;
+	}
+
+	.k-grid-filter-popup .k-filter-menu-container {
+		padding: 8px !important;
+	}
+
+	.k-grid-filter-popup .k-filter-menu-buttons {
+		padding: 6px 8px !important;
+		gap: 6px !important;
+		border-top: 1px solid var(--kendo-color-border-alt) !important;
+	}
+
+	/* Compact dropdown styling in filter menu */
+	.k-grid-filter-popup .k-dropdownlist .k-dropdown-wrap {
+		height: 28px !important;
+	}
+
+	.k-grid-filter-popup .k-dropdownlist .k-input {
+		height: 26px !important;
+		line-height: 26px !important;
+		font-size: 11px !important;
+		padding: 0 6px !important;
+	}
+
+	.k-grid-filter-popup .k-dropdownlist .k-select {
+		height: 28px !important;
+		width: 28px !important;
+	}
+
+	.k-grid-filter-popup .k-dropdownlist .k-select .k-icon {
+		font-size: 10px !important;
+	}
+
+	/* Compact CheckBoxList ComboBox styling */
+	.k-grid-filter-popup .k-multiselect {
+		min-height: 28px !important;
+		font-size: 11px !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-multiselect-wrap {
+		min-height: 28px !important;
+		padding: 2px 6px !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-input {
+		height: 24px !important;
+		line-height: 24px !important;
+		font-size: 11px !important;
+		padding: 0 !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-button {
+		height: 28px !important;
+		width: 28px !important;
+		padding: 2px !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-button .k-icon {
+		font-size: 10px !important;
+	}
+
+	/* Compact CheckBoxList tags/chips */
+	.k-grid-filter-popup .k-multiselect .k-chip {
+		height: 18px !important;
+		padding: 1px 4px !important;
+		font-size: 10px !important;
+		line-height: 1.2 !important;
+		margin: 1px 2px 1px 0 !important;
+		border-radius: 2px !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-chip .k-chip-content {
+		padding: 0 2px !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-chip .k-chip-action {
+		width: 14px !important;
+		height: 14px !important;
+		padding: 0 !important;
+	}
+
+	.k-grid-filter-popup .k-multiselect .k-chip .k-chip-action .k-icon {
+		font-size: 8px !important;
+	}
+
+	/* Search box in CheckBoxList popup */
+	.k-grid-filter-popup .k-searchbox {
+		height: 28px !important;
+		margin-bottom: 6px !important;
+	}
+
+	.k-grid-filter-popup .k-searchbox .k-input {
+		height: 26px !important;
+		font-size: 11px !important;
+		padding: 2px 6px !important;
+	}
+
+	.k-grid-filter-popup .k-searchbox .k-button {
+		height: 28px !important;
+		width: 28px !important;
+	}
+
+	.k-grid-filter-popup .k-searchbox .k-icon {
+		font-size: 10px !important;
+	}
 </style>
 
 @code {
@@ -370,6 +553,17 @@
 	{
 		if (CurrentGridState?.FilterDescriptors?.Any() != true) return null;
 
+		// If there's only one filter and it's already a CompositeFilterDescriptor, return it directly
+		if (CurrentGridState.FilterDescriptors.Count == 1)
+		{
+			var firstFilter = CurrentGridState.FilterDescriptors.First();
+			if (firstFilter is CompositeFilterDescriptor singleComposite)
+			{
+				return singleComposite;
+			}
+		}
+
+		// Only create a new CompositeFilterDescriptor if we have multiple filters
 		var combined = new CompositeFilterDescriptor
 		{
 			LogicalOperator = FilterCompositionLogicalOperator.And
@@ -385,11 +579,31 @@
 
 	private async Task ToggleGridMaximize()
 	{
+		// Store current page info before toggling
+		var currentState = GridRef?.GetState();
+		var currentPage = currentState?.Page ?? 1;
+		var currentPageSize = IsGridMaximized ? 50 : 20;
+		var currentItemIndex = ((currentPage - 1) * currentPageSize) + 1; // First item on current page
+
 		IsGridMaximized = !IsGridMaximized;
 		StateHasChanged();
 
+		// After the grid re-renders with new page size, calculate and set the appropriate page
+		await Task.Delay(100); // Allow grid to re-render
+
+		if (GridRef != null)
+		{
+			var newPageSize = IsGridMaximized ? 50 : 20;
+			var newPage = Math.Max(1, (int)Math.Ceiling((double)currentItemIndex / newPageSize));
+
+			// Update the grid state to maintain position
+			var newState = GridRef.GetState();
+			newState.Page = newPage;
+			await GridRef.SetStateAsync(newState);
+		}
+
 		// Remove focus from the button after click using JavaScript
-		await Task.Delay(50); // Small delay to ensure the state change is rendered
+		await Task.Delay(50);
 		await JSRuntime.InvokeVoidAsync("eval", "document.querySelector('.grid-maximize-btn')?.blur()");
 	}
 }
