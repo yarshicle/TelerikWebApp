@@ -78,6 +78,16 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid var(--app-border-color);
 }
 
+/* Ensure top-row is properly dark in dark mode */
+html.theme-dark .top-row {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-bottom: 1px solid #404040;
+}
+    html.theme-dark .top-row.navbar-dark{
+        background-color: var(--app-navbar-bg);
+    }
+
 .sidebar {
     background-color: var(--app-sidebar-bg);
     color: var(--app-sidebar-text);
