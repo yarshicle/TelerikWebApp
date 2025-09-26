@@ -1,0 +1,287 @@
+/*Compact Telerik Grid*/
+.compact-grid {
+    --kendo-grid-header-padding-y: 4px;
+    --kendo-grid-cell-padding-y: 4px;
+    --kendo-grid-font-size: 12px;
+    font-size: 12px;
+}
+
+    .compact-grid .k-grid-header .k-header {
+        font-weight: 600;
+        background-color: var(--kendo-color-primary-subtle);
+        padding: 4px 8px !important;
+        line-height: 1.2;
+    }
+
+    .compact-grid .k-grid-table td {
+        border-color: var(--kendo-color-border-alt);
+        padding: 4px 8px !important;
+        line-height: 1.3;
+    }
+
+    .compact-grid .k-filter-row td {
+        padding: 2px 4px !important;
+        vertical-align: middle;
+    }
+
+    .compact-grid .k-filter-row .k-textbox,
+    .compact-grid .k-filter-row .k-dropdownlist,
+    .compact-grid .k-filter-row .k-numerictextbox {
+        height: 28px !important;
+        font-size: 11px !important;
+        padding: 2px 6px !important;
+    }
+
+    .compact-grid .k-filter-row .k-button {
+        height: 26px !important;
+        width: 26px !important;
+        min-width: 26px !important;
+        padding: 2px !important;
+        font-size: 11px !important;
+    }
+
+    .compact-grid .k-filter-row .k-icon {
+        font-size: 12px !important;
+    }
+
+    .compact-grid .k-pager {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+    }
+
+        .compact-grid .k-pager .k-button {
+            height: 24px !important;
+            min-width: 24px !important;
+            padding: 2px 6px !important;
+            font-size: 11px !important;
+        }
+
+        .compact-grid .k-pager .k-numerictextbox {
+            height: 28px !important;
+            font-size: 11px !important;
+            padding: 2px 6px !important;
+        }
+
+/*Grid Maximize/Restore button */
+.grid-maximize-btn {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    padding: 0 !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    color: var(--kendo-color-primary) !important;
+}
+
+    .grid-maximize-btn:hover {
+        background: var(--kendo-color-primary-subtle) !important;
+        border-color: var(--kendo-color-border) !important;
+        color: var(--kendo-color-primary) !important;
+    }
+
+    .grid-maximize-btn:active {
+        background: var(--kendo-color-primary) !important;
+        color: var(--kendo-color-on-primary) !important;
+    }
+
+    .grid-maximize-btn:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .grid-maximize-btn .k-icon {
+        font-size: 12px !important;
+    }
+
+/* Remove border radius from grid when inside wrapper */
+.grid-wrapper .k-grid {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+
+/* Compact FilterMenu styling - Global CSS for popup components */
+.k-grid-filter-popup .k-popup {
+    font-size: 12px !important;
+}
+
+.k-grid-filter-popup .k-textbox,
+.k-grid-filter-popup .k-searchbox,
+.k-grid-filter-popup .k-dropdownlist,
+.k-grid-filter-popup .k-numerictextbox,
+.k-grid-filter-popup .k-datepicker,
+.k-grid-filter-popup .k-datetimepicker {
+    height: 28px !important;
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+}
+
+.k-grid-filter-popup .k-button {
+    height: 28px !important;
+    padding: 4px 12px !important;
+    font-size: 11px !important;
+    border-radius: 3px !important;
+}
+
+.k-grid-filter-popup .k-button.k-button-sm {
+    height: 26px !important;
+    padding: 3px 8px !important;
+    font-size: 10px !important;
+}
+
+.k-grid-filter-popup .k-icon {
+    font-size: 11px !important;
+}
+
+.k-grid-filter-popup .k-label {
+    font-size: 11px !important;
+    padding: 2px 4px !important;
+    line-height: 1.2;
+}
+
+/* Compact FilterMenu CheckBoxList styling */
+.k-grid-filter-popup .k-item {
+    padding: 3px 8px !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    min-height: 22px !important;
+}
+
+.k-grid-filter-popup .k-item .k-checkbox {
+    width: 14px !important;
+    height: 14px !important;
+    margin-right: 6px !important;
+}
+
+.k-grid-filter-popup .k-item .k-checkbox-label {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+}
+
+.k-grid-filter-popup .k-list {
+    padding: 2px !important;
+}
+
+.k-grid-filter-popup .k-list-header {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--kendo-color-surface-alt) !important;
+}
+
+/* Compact FilterMenu form styling */
+.k-grid-filter-popup .k-form-field {
+    margin-bottom: 8px !important;
+}
+
+.k-grid-filter-popup .k-form-field-wrap {
+    padding: 2px 0 !important;
+}
+
+.k-grid-filter-popup .k-filter-menu-container {
+    padding: 8px !important;
+}
+
+.k-grid-filter-popup .k-filter-menu-buttons {
+    padding: 6px 8px !important;
+    gap: 6px !important;
+    border-top: 1px solid var(--kendo-color-border-alt) !important;
+}
+
+/* Compact dropdown styling in filter menu */
+.k-grid-filter-popup .k-dropdownlist .k-dropdown-wrap {
+    height: 28px !important;
+}
+
+.k-grid-filter-popup .k-dropdownlist .k-input {
+    height: 26px !important;
+    line-height: 26px !important;
+    font-size: 11px !important;
+    padding: 0 6px !important;
+}
+
+.k-grid-filter-popup .k-dropdownlist .k-select {
+    height: 28px !important;
+    width: 28px !important;
+}
+
+.k-grid-filter-popup .k-dropdownlist .k-select .k-icon {
+    font-size: 10px !important;
+}
+
+/* Compact CheckBoxList ComboBox styling */
+.k-grid-filter-popup .k-multiselect {
+    min-height: 28px !important;
+    font-size: 11px !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-multiselect-wrap {
+    min-height: 28px !important;
+    padding: 2px 6px !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-input {
+    height: 24px !important;
+    line-height: 24px !important;
+    font-size: 11px !important;
+    padding: 0 !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-button {
+    height: 28px !important;
+    width: 28px !important;
+    padding: 2px !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-button .k-icon {
+    font-size: 10px !important;
+}
+
+/* Compact CheckBoxList tags/chips */
+.k-grid-filter-popup .k-multiselect .k-chip {
+    height: 18px !important;
+    padding: 1px 4px !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    margin: 1px 2px 1px 0 !important;
+    border-radius: 2px !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-chip .k-chip-content {
+    padding: 0 2px !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-chip .k-chip-action {
+    width: 14px !important;
+    height: 14px !important;
+    padding: 0 !important;
+}
+
+.k-grid-filter-popup .k-multiselect .k-chip .k-chip-action .k-icon {
+    font-size: 8px !important;
+}
+
+/* Search box in CheckBoxList popup */
+.k-grid-filter-popup .k-searchbox {
+    height: 28px !important;
+    margin-bottom: 6px !important;
+}
+
+.k-grid-filter-popup .k-searchbox .k-input {
+    height: 26px !important;
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+}
+
+.k-grid-filter-popup .k-searchbox .k-button {
+    height: 28px !important;
+    width: 28px !important;
+}
+
+.k-grid-filter-popup .k-searchbox .k-icon {
+    font-size: 10px !important;
+}
